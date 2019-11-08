@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body onload="alert('Bine ai venit.')">
+
+  <script src="./js/app.js"></script>
+
+  <h1 onclick="alert('Catalin')"> Hello:</h1>
+
+  <button onclick="console.log('Am fost apasat.')">Apasa-ma !</button>
+  <button onclick="alert(' Butonul a fost apasat.')">Apasa-ma!!!</button>
+  <button onmouseover="console.log('Ai vrea sa apesi acest buton?')" onclick="forFun()">???</button>
+
+  <script>
+    function forFun() {
+      var promptedName = prompt("Care este numele tau?");
+      console.log(promptedName);
+    } 
+  </script>
+
+</body>
+
+</html>
+<!-- Creeaza dupa structura de fisiere de la exercitiul 01 un proiect cu un singur fisier JavaScript. 
+  Programul din fisier trebuie sa afiseze numele tau in consola. 
+In corpul documentului HTML adauga un element h1 cu textul Hello: pe care atunci cand dai click se va afisa o alerta cu numele tau. 
+Adauga un buton care la click va afisa in consola: Am fost apasat. 
+Adauga un alt buton care la click va afisa o alerta cu textul: Butonul a fost apasat. 
+Adauga un alt buton care pe mouseover va afisa in consola textul: Ai vrea sa apesi acest buton? 
+Cand butonul este apasat afiseaza o alerta de tip prompt care sa ceara numele utilizatorului. 
+Afiseaza numele introdus in consola. 
+Afiseaza la incarcarea siteului o alerta pe care scrie: Bine ai venit. 
+Modifica acest cod si transforma alerta intr-un prompt care afiseaza: Bine ai venit, cum te cheama?
+Afiseaza raspunsul utilizatorului in consola. -->
