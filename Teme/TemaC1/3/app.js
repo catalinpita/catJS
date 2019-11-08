@@ -10,7 +10,9 @@ form.addEventListener('submit', function(evt) {
 
   var volume = 4 / 3 * Math.PI * Math.pow(radius,3) ;
   var surface = 4  * Math.PI * Math.pow(radius,2) ;
+
   elementResultVolume.innerText = volume;
   elementResultSurface.innerText = surface;
+  
   evt.preventDefault();
 });
