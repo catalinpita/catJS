@@ -1,19 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 <body>
-  <form>
-    <label for="tryNumber">My try is</label>
-    <input type="text" id="tryNumber" name="tryNumber" placeholder="Your guess...">
-    <input type="hidden" id="numbetTogGuess" name="numbetTogGuess" value="">
+
+
+  <form class="font-weight-bold">
+    <h1 class="container">Ghiceste la ce numar ma gandesc!</h1>
+    <div class="container">
+      <div class="col-12">
+
+        <div class="row">
+          <div class="col-2">
+            <label for="maxTries">Cat de norocos esti? </label>
+          </div>
+          <div class="col-3">
+            <input type="number" id="maxTries" name="maxTries" placeholder="10" min="3" max="30">
+          </div>
+          <div class="col-2 col-lg-4">
+            <p>(alegeumarul de incercari)</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="upperRange">Maximum la care ma pot gândi</label>
+            <input type="number" id="upperRange" name="upperRange" placeholder="10" min="3" max="100">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-8">
+            <button class="btn btn-primary btn-block">Start</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class=col>
+            <br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-1 col-lg-3">
+            <p id="tryNumber">Incercarea <span> </span>: <label for="myTry">Cred ca te gandesti la...</label></p>
+          </div>
+          <div class="col-2">
+            <input type="number" id="myTry" name="myTry" min="100">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            <button class="btn btn-success btn-block">Am ghicit?</button>
+          </div>
+          <div class="col-4">
+            <button class="btn btn-danger btn-block">Triseaza!</button>
+          </div>
+        </div>
+
+        <div class="row">
+
+        </div>
+
+      </div>
+    </div>
   </form>
 
   <script src="getRandom.js"></script>
 
 </body>
+
 </html>
