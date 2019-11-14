@@ -1,23 +1,20 @@
 
-var started=false;
-var maxTries = document.getElementById('maxTries').value;
-var upperRange = document.getElementById('upperRange').value;
+var isStarted = false;
+
+var maxTriesInput = document.getElementById('maxTries');
+var upperRangeInput = document.getElementById('upperRange');
+
+var startButton = document.getElementById('startButton');
+
+startButton.addEventListener("click", startFunction);
 
 
-document.getElementById("startButton").addEventListener("click", startFunction);
 
-
-
-var maxTries;
-var upperRange;
+var maxTries = 0;
+var upperRange = 0;
 
 var numberToGuess;
-if (!started) {
-  started = true;
-  numberToGuess = Math.random() * (upperRange + 1);  //(Math.random() * ((max - min) + 1)) + min
-} else {
 
-}
 
 
 // var inputWidth = document.getElementById('width');
@@ -36,4 +33,11 @@ if (!started) {
 //   evt.preventDefault();
 // });
 
-function startFunction() { started = true; document.getElementById("startButton").disabled = true; console.log(maxTries+ "-"+upperRange);};
+function startFunction() {
+  if (isStarted===false) {
+    numberToGuess = Math.random() * (upperRange + 1); //(Math.random() * ((max - min) + 1)) + min
+    isStarted = true;
+    alert(isStarted);
+  } else alert('Ignorted');
+  alert
+};
