@@ -1,11 +1,60 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>Flow</title>
 </head>
+
 <body>
+    <h1><b>
+            <p id='message'></p>
+            <p id='userName'></p>
+        </b>
+    </h1>
 
 
+    <script>
+        var value = window.prompt(),
+            message = 'Numarul este ',
+            paragraph = document.getElementById('message');
+
+        console.log('Valoarea este:' + value);
+
+        if (value % 2 === 0) {
+            message += ' par';
+        } else {
+            message += ' nuia';
+        }
+        paragraph.innerText = message;
+
+
+
+        if (value > 20) {
+            message = ' mare ';
+        } else {
+            mesaage = ' mic ';
+        }
+
+        paragraph.innerText += (' si mai ' + message + ' ca 20');
+
+        var userName = window.prompt('Care este numele tau?');
+
+        var userNameParagrph = document.getElementById('userName');
+        userNameParagrph.innerText = `Numele meu este: ${userName}`;
+
+        userNameParagrph.innerText += ` numele are ${userName.replace(' ','').length} litere`;
+
+        var contine = userName.includes('a') ? ' ' : ' nu ';
+        userNameParagrph.innerText += ` ~~~ Numele introdus${contine}contine litera "a".`;
+
+    </script>
 </body>
+
 </html>
+
+<!-- Folosind metoda prompt() afiseaza in pagina mesajul: “Numarul introdus este mai mic | mai mare decat 20.”
+Foloseste aceeasi metoda pentru a captura numele utilizatorului si pentru a afisa in document mesajul: “Numele meu este: xxx yyy.”
+Folosind aceeasi metoda afiseaza in document propozitia: “Numele introdus are xxx caractere.” Inlocuieste spatiile cu stringul gol pentru a nu le numara. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
+Folosind prompt() si String.includes() afiseaza mesajul: “Numele introdus contine|nu contine litera a.”
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes -->

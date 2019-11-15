@@ -33,11 +33,17 @@ var numberToGuess;
 //   evt.preventDefault();
 // });
 
-function startFunction() {
-  if (isStarted===false) {
-    numberToGuess = Math.random() * (upperRange + 1); //(Math.random() * ((max - min) + 1)) + min
+function startFunction(evt) {
+
+
+  if (isStarted === false) {
+    // numberToGuess = Math.random() * (upperRange + 1); //(Math.random() * ((max - min) + 1)) + min
+    startButton.classList.add('disabled');
+    startButton.disabled = true;
     isStarted = true;
     alert(isStarted);
-  } else alert('Ignorted');
-  alert
-};
+  } else {
+    alert('Ignored');
+  }
+  evt.preventDefault();
+}
