@@ -1,6 +1,6 @@
 
-var isStarted = false;
-
+var isStarted;
+var cheated;
 var maxTries, upperRange;
 var numberToGuess;
 var triedNumbers;
@@ -31,13 +31,14 @@ function startFunction(evt) {
     maxTries = maxTriesInput.value;
     upperRange = parseInt(upperRangeInput.value);
     numberToGuess = Math.ceil(Math.random() * upperRange);
-    triedNumbers=[];
+    triedNumbers = [];
     isStarted = true;
-    tryNumber=1;
+    tryNumber = 1;
+
     document.getElementById('response').innerHTML = '';
     document.getElementById('numberOfTry').innerText = '1';
     document.getElementById('yourTries').innerText = '';
-    
+
     enableControlsByState(isStarted);
 
   }
@@ -80,22 +81,21 @@ function tryFunction(evt) {
   evt.preventDefault();
 }
 
-/**********************************************************************************************/
-function notTriedYet(triedNumbers, myTry) {
-  for (index = 0; index < triedNumbers.length; index++)
-    if (myTry === parseInt(triedNumbers[index]))
-      return false;
-  return true;
-}
+
 
 /**********************************************************************************************/
 function cheatFunction(evt) {
 
-  if (isStarted == true) {
-  alert(numberToGuess);
-    // isStarted = false;
-    // enableControlsByState(isStarted)
-  }
+  
+    if (cheated == false) {
+      alert(numberToGuess);
+    } else {
+      cheated = true;
+      alert('Hehe! Ulciorul nu merge ne multe ori la apa!!!');
+      isStarted = false;
+      enableControlsByState(isStarted)
+    }
+ 
   evt.preventDefault();
 }
 
@@ -103,12 +103,13 @@ function cheatFunction(evt) {
 function initFunction() {
 
   isStarted = false;
+  cheated = false;
   maxTries = 0;
   upperRange = 0;
   numberToGuess = 0;
   triedNumbers = [];
   tryNumber = 1;
- 
+
   enableControlsByState(isStarted);
   document.getElementById('response').innerHTML = '';
   document.getElementById('numberOfTry').innerText = '1';
@@ -118,7 +119,7 @@ function initFunction() {
 
 /**********************************************************************************************/
 function enableControlsByState(state) {
-  if (state == false) {
+  if (state === false) {
     startButton.classList.remove('disabled');
     startButton.disabled = false;
 
@@ -145,4 +146,12 @@ function enableControlsByState(state) {
     maxTriesInput.disabled = true;
     upperRangeInput.disabled = true;
   }
+}
+
+/**********************************************************************************************/
+function notTriedYet(triedNumbers, myTry) {
+  for (index = 0; index < triedNumbers.length; index++)
+    if (myTry === parseInt(triedNumbers[index]))
+      return false;
+  return true;
 }
