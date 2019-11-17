@@ -12,7 +12,6 @@
 
 <body>
 
-
   <form class="font-weight-bold">
 
     <div class="container">
@@ -35,7 +34,7 @@
             <label for="maxTries">Cat de norocos esti? </label>
           </div>
           <div class="col-3 col-lg-2">
-            <input type="number" id="maxTries" name="maxTries" placeholder="10" min="3" max="30">
+            <input type="number" id="maxTries" name="maxTries" placeholder="10" min="3" max="100" value="10">
           </div>
           <div class="col-2 col-lg-4">
             <p>(alege numarul de incercari)</p>
@@ -45,7 +44,7 @@
         <div class="row">
           <div class="col">
             <label for="upperRange">Maximum la care ma pot gândi</label>
-            <input type="number" id="upperRange" name="upperRange" placeholder="10" min="3" max="100">
+            <input type="number" id="upperRange" name="upperRange" placeholder="100" min="30" max="100" value="50">
           </div>
         </div>
 
@@ -63,32 +62,48 @@
 
         <div class="row">
           <div class="col-1 col-lg-4">
-            <p id="tryNumber">Incercarea <span> </span>: <label for="myTry">Cred ca te gandesti la...</label></p>
+            <p id="tryNumber">Incercarea <span id="numberOfTry"></span>:
+              <label for="myTry">Cred ca te gândesti la...</label></p>
           </div>
           <div class="col-2">
-            <input type="number" id="myTry" name="myTry" min="1">
+            <input type="number" id="currentTry" name="myTry" min="1">
           </div>
         </div>
 
         <div class="row">
           <div class="col-4">
-            <button class="btn btn-success btn-block">Am ghicit?</button>
+            <button class="btn btn-success btn-block" id="tryButton">Am ghicit?</button>
           </div>
           <div class="col-4">
-            <button class="btn btn-danger btn-block">Triseaza!</button>
+            <button class="btn btn-danger btn-block" id="cheatButton">Triseaza!</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12"><br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h4 id="response"></h4>
           </div>
         </div>
 
         <div class="row">
-
-        </div>
+            <div class="col-12"><br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <h4 id="yourTries"></h4>
+            </div>
+          </div>
 
       </div>
     </div>
   </form>
 
-  <script src="getRandom.js"></script>
 
+  <script src="getRandom.js"></script>
 </body>
 
 </html>
