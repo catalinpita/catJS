@@ -1,10 +1,11 @@
 
 var isStarted;
-var cheated;
+var cheated, cheatedLevel;
 var maxTries, upperRange;
 var numberToGuess;
 var triedNumbers;
 var tryNumber;
+var level;
 
 var maxTriesInput = document.getElementById('maxTries');
 var upperRangeInput = document.getElementById('upperRange');
@@ -59,6 +60,8 @@ function tryFunction(evt) {
         document.getElementById('response').innerHTML = `Bravo, ai ghicit! <b>${myTry}</b> este numarul la care m-am gandit.`;
         isStarted = false;
         enableControlsByState(isStarted);
+        level++;
+        document.getElementById('level').innerText = level;
       } else {
         document.getElementById('response').innerHTML = `Numarul <b>${myTry}</b> este mai <b>${(myTry < numberToGuess) ? 'mic' : 'mare'}</b> decat cel la care ma gandesc.`;
 
@@ -81,27 +84,31 @@ function tryFunction(evt) {
   evt.preventDefault();
 }
 
-
-
 /**********************************************************************************************/
 function cheatFunction(evt) {
 
-  
-    if (cheated == false) {
-      alert(numberToGuess);
-    } else {
-      cheated = true;
-      alert('Hehe! Ulciorul nu merge ne multe ori la apa!!!');
-      isStarted = false;
-      enableControlsByState(isStarted)
-    }
- 
+
+  if (cheated === false || level === cheatedLevel) {
+    alert(`Si vântul shoptea.... ${numberToGuess}.`);
+    cheated = true;
+    cheatedLevel = level;
+  } else {
+    cheated = true;
+    alert('Hehe! Sarpele zburator o zi zboara una nu, astzai nu mai zboara. Incearca poimâine!');
+    isStarted = false;
+    level = 1;
+    document.getElementById('yourTries').innerText += ' pâna la urma ai trisat :~))';
+    document.getElementById('level').innerText = level;
+    enableControlsByState(isStarted)
+  }
+
   evt.preventDefault();
 }
 
 /**********************************************************************************************/
 function initFunction() {
-
+  level = 1;
+  cheatedLevel = 0;
   isStarted = false;
   cheated = false;
   maxTries = 0;
@@ -113,7 +120,8 @@ function initFunction() {
   enableControlsByState(isStarted);
   document.getElementById('response').innerHTML = '';
   document.getElementById('numberOfTry').innerText = '1';
-  document.getElementById('yourTries').innerHTML = '';
+  document.getElementById('yourTries').innerText = '';
+  document.getElementById('level').innerText = level;
 
 }
 
