@@ -6,6 +6,8 @@ var numberToGuess;
 var triedNumbers;
 var tryNumber;
 var level;
+var settingsForm = document.getElementById('settingsForm');
+var gameForm = document.getElementById('gameForm');
 
 var maxTriesInput = document.getElementById('maxTries');
 var upperRangeInput = document.getElementById('upperRange');
@@ -16,9 +18,9 @@ var startButton = document.getElementById('startButton');
 var tryButton = document.getElementById('tryButton');
 var cheatButton = document.getElementById('cheatButton');
 
-startButton.addEventListener("click", startFunction);
+settingsForm.addEventListener("submit", startFunction);
 
-tryButton.addEventListener("click", tryFunction);
+gameForm.addEventListener("submit", tryFunction);
 cheatButton.addEventListener("click", cheatFunction);
 
 
