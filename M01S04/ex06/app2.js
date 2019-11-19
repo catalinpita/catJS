@@ -26,6 +26,11 @@ for (let index = 0; index < person.friends.length; index++) {
   totalAge += person.friends[index].age;
 }
 console.log("numarul total de ani pe care il au persoanele din arrayul friends " + totalAge);
+var suma=person.friends.reduce(function(sum,friend){
+  sum+=friend.age;
+  return sum;
+},0);
+console.log("numarul$$$$$$$$$$$$$$$$$ " + suma);
 console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
 //  Folosind un for, afiseaza suma anilor  persoanelor. 
 
