@@ -1,14 +1,14 @@
 const defaultUserName = "Anonymous";
-var userName = prompt("Sub ce nume joci", defaultUserName)||defaultUserName;
+var userName = prompt("Sub ce nume joci", defaultUserName) || defaultUserName;
 var user = getFromLocalStorage(userName);
 
-var message1 = `Bine ai intrat in joc <b>${userName}</b>!!!`;
-var message2 = `Bine ai revenit  <b>${userName}</b>!!!`;
+const message1 = `Bine ai intrat in joc <b>${userName}</b>!!!`;
+const message2 = `Bine ai revenit  <b>${userName}</b>!!!`;
 
 
-document.getElementById('userEntrance').innerHTML =( (user.maxLevel == 0) ? message1 : message2);
+document.getElementById('userEntrance').innerHTML = ((user.maxLevel == 0) ? message1 : message2);
 
-var message3=`Recordul tau este de <b>${user.maxPoints}</b> puncte obtinute in <b>${user.maxLevel}</b> nivele!`;
+const message3 = `Recordul tau este de <b>${user.maxPoints}</b> puncte si <b>${user.maxLevel}</b> nivele!`;
 document.getElementById('userPerformance').innerHTML = user.maxLevel == 0 ? "" : message3;
 
 var isStarted;
@@ -17,7 +17,7 @@ var maxTries, upperRange;
 var numberToGuess;
 var triedNumbers;
 var tryNumber;
-var level;
+var level,points;
 var settingsForm = document.getElementById('settingsForm');
 var gameForm = document.getElementById('gameForm');
 
@@ -64,8 +64,9 @@ function startFunction(evt) {
 function tryFunction(evt) {
 
   const myTry = parseInt(currentTryInput.value);
-
-  if (isStarted === true) {
+  if (isNaN(myTry)) {
+    //nothing to do;
+  } else if (isStarted === true) {
     if (myTry > upperRange) {
       alert(`Psssst ma gandesc la un numar intre 0 si ${upperRange}.`);
 
@@ -75,7 +76,7 @@ function tryFunction(evt) {
         isStarted = false;
         enableControlsByState(isStarted);
         level++;
-        updateUser(user, level);
+        updateUserStorage(user, level,points);
         document.getElementById('level').innerText = level;
       } else {
         document.getElementById('response').innerHTML = `Numarul <b>${myTry}</b> este mai <b>${(myTry < numberToGuess) ? 'mic' : 'mare'}</b> decat cel la care ma gandesc.`;
@@ -102,8 +103,9 @@ function tryFunction(evt) {
 /**********************************************************************************************/
 function cheatFunction(evt) {
 
-
-  if (cheated === false || level === cheatedLevel) {
+  if (level === 0 && triedNumbers.length === 0) {
+    alert("Serios!?! Chiar asa, din prima? |:-(>)");
+  } else if (cheated === false || level === cheatedLevel) {
     alert(`Si vântul shoptea.... ${numberToGuess}.`);
     cheated = true;
     cheatedLevel = level;
@@ -112,7 +114,7 @@ function cheatFunction(evt) {
     alert('Hehe! Sarpele zburator o zi zboara una nu, astzai nu mai zboara. Incearca poimâine!');
     isStarted = false;
     level = 1;
-    document.getElementById('yourTries').innerText += ' pâna la urma ai trisat :~))';
+    document.getElementById('yourTries').innerText += ' pâna la urma ai trisat |:~))';
     document.getElementById('level').innerText = level;
     enableControlsByState(isStarted)
   }
@@ -123,6 +125,7 @@ function cheatFunction(evt) {
 /**********************************************************************************************/
 function initFunction() {
   level = 0;
+  points=0;
   cheatedLevel = 0;
   isStarted = false;
   cheated = false;
@@ -180,7 +183,6 @@ function notTriedYet(triedNumbers, myTry) {
 }
 
 /**********************************************************************************************/
-
 function persistToLocalStorage(user) {
   localStorage.setItem("guessNumber>" + user.name, JSON.stringify(user));
 }
@@ -195,10 +197,20 @@ function getFromLocalStorage(userName) {
 
 }
 
-
-function updateUser(user, level) {
+/**********************************************************************************************/
+function updateUserStorage(user, level, points) {
+  var isLevelRecord = false;
   if (level > user.maxLevel) {
     user.maxLevel = level;
+    isLevelRecord = true;
+    alert(`Super ${user.name}, ai depasit recordul nivelelor.`)
   }
+
+  if (points > user.maxLevel) {
+    user.maxPoints = maxPoints;
+    if (!isLevelRecord)
+      alert(`De ne crezut! ${user.name}, ai un noou record pentru puncte.`)
+  }
+
   persistToLocalStorage(user);
 }
