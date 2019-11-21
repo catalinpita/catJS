@@ -1,3 +1,15 @@
+const defaultUserName = "Anonymous";
+var userName = prompt("Sub ce nume joci", defaultUserName)||defaultUserName;
+var user = getFromLocalStorage(userName);
+
+var message1 = `Bine ai intrat in joc <b>${userName}</b>!!!`;
+var message2 = `Bine ai revenit  <b>${userName}</b>!!!`;
+
+
+document.getElementById('userEntrance').innerHTML =( (user.maxLevel == 0) ? message1 : message2);
+
+var message3=`Recordul tau este de <b>${user.maxPoints}</b> puncte obtinute in <b>${user.maxLevel}</b> nivele!`;
+document.getElementById('userPerformance').innerHTML = user.maxLevel == 0 ? "" : message3;
 
 var isStarted;
 var cheated, cheatedLevel;
@@ -63,6 +75,7 @@ function tryFunction(evt) {
         isStarted = false;
         enableControlsByState(isStarted);
         level++;
+        updateUser(user, level);
         document.getElementById('level').innerText = level;
       } else {
         document.getElementById('response').innerHTML = `Numarul <b>${myTry}</b> este mai <b>${(myTry < numberToGuess) ? 'mic' : 'mare'}</b> decat cel la care ma gandesc.`;
@@ -109,7 +122,7 @@ function cheatFunction(evt) {
 
 /**********************************************************************************************/
 function initFunction() {
-  level = 1;
+  level = 0;
   cheatedLevel = 0;
   isStarted = false;
   cheated = false;
@@ -164,4 +177,28 @@ function notTriedYet(triedNumbers, myTry) {
     if (myTry === parseInt(triedNumbers[index]))
       return false;
   return true;
+}
+
+/**********************************************************************************************/
+
+function persistToLocalStorage(user) {
+  localStorage.setItem("guessNumber>" + user.name, JSON.stringify(user));
+}
+
+function getFromLocalStorage(userName) {
+
+  var newUser = {
+    name: userName, maxPoints: 0, maxLevel: 0
+  };
+  var userData = localStorage.getItem("guessNumber>" + userName);
+  return userData != null ? JSON.parse(userData) : newUser;
+
+}
+
+
+function updateUser(user, level) {
+  if (level > user.maxLevel) {
+    user.maxLevel = level;
+  }
+  persistToLocalStorage(user);
 }
