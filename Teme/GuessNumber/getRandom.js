@@ -1,3 +1,4 @@
+const secondsToCompleteLevel = 180;
 const defaultUserName = "Anonymous";
 var userName = prompt("Sub ce nume te joci?", defaultUserName) || defaultUserName;
 var user = getFromLocalStorage(userName);
@@ -17,7 +18,7 @@ var maxTries, upperRange;
 var numberToGuess;
 var triedNumbers;
 var tryNumber;
-var level, points;
+var level, points, level, levelStartTime, levelEndTime;
 var settingsForm = document.getElementById('settingsForm');
 var gameForm = document.getElementById('gameForm');
 
@@ -35,14 +36,20 @@ settingsForm.addEventListener("submit", startFunction);
 gameForm.addEventListener("submit", tryFunction);
 cheatButton.addEventListener("click", cheatFunction);
 
-
+var timer;
 initFunction();
 
 /**********************************************************************************************/
 // numberToGuess = Math.random() * (upperRange + 1); //(Math.random() * ((max - min) + 1)) + min.
 function startFunction(evt) {
-  if (isStarted === false) {
 
+  if (isStarted === false) {
+    levelStartTime = (new Date()).getTime();
+    if (level == 0)
+      level++;
+
+    document.getElementById('level').innerText = level;
+    timer = window.setInterval(displayTimeProgress, 1000);
     maxTries = maxTriesInput.value;
     upperRange = parseInt(upperRangeInput.value);
     numberToGuess = Math.ceil(Math.random() * upperRange);
@@ -78,13 +85,15 @@ function tryFunction(evt) {
         level++;
         updateUserStorage(user, level, points);
         document.getElementById('level').innerText = level;
+        window.clearInterval(timer);
+        levelStartTime.levelEndTime = new Date().getTime();
       } else {
         document.getElementById('response').innerHTML = `Numarul <b>${myTry}</b> este mai <b>${(myTry < numberToGuess) ? 'mic' : 'mare'}</b> decat cel la care ma gandesc.`;
 
         if (++tryNumber > maxTries) {
           document.getElementById('response').innerHTML = `Ai terminat munitia!!! eu ma gandeam la numarul ${numberToGuess}.`;
           document.getElementById('numberOfTry').innerText = '...';
-        
+
           if (level > 3) {
             level--;
           } else {
@@ -92,7 +101,7 @@ function tryFunction(evt) {
           }
           enableControlsByState(isStarted);
         }
-        
+
         triedNumbers.push(myTry);
       }
       document.getElementById('numberOfTry').innerText = tryNumber;
@@ -218,4 +227,36 @@ function updateUserStorage(user, level, points) {
   }
 
   persistToLocalStorage(user);
+}
+/**********************************************************************************************/
+
+function displayTimeProgress() {
+
+  var secondsElapsed = Math.ceil((new Date().getTime() - levelStartTime) / 1000);
+  document.getElementById('seconds').innerText = secondsElapsed;
+
+  var timePercentage = Math.floor((secondsElapsed * 100) / secondsToCompleteLevel);
+
+  const timeProgressBar = document.getElementById('timeProgressBar');
+
+  timeProgressBar.classList.remove('invisible')
+  timeProgressBar.style = `width: ${timePercentage}%`;
+  if (timePercentage < 50) {
+    timeProgressBar.classList.remove('bg-danger');
+    timeProgressBar.classList.add('bg-success');
+  } else if (timePercentage < 75) {
+    timeProgressBar.classList.remove('bg-success');
+    timeProgressBar.classList.add('bg-warning');
+  } else if (timePercentage < 100) {
+    timeProgressBar.classList.remove('bg-warnig');
+    timeProgressBar.classList.add('bg-danger');
+  } else {
+    window.clearInterval(timer);
+    levelStartTime.levelEndTime = new Date().getTime();
+    isStarted = false;
+    enableControlsByState(isStarted);
+    alert(`Ghinion... a zburat tot timpu'.`)
+    timeProgressBar.classList.add('invisible');
+    timeProgressBar.style = `width: ${0}%`;
+  }
 }
