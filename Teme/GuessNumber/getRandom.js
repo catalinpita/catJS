@@ -17,7 +17,7 @@ var maxTries, upperRange;
 var numberToGuess;
 var triedNumbers;
 var tryNumber;
-var level,points;
+var level, points;
 var settingsForm = document.getElementById('settingsForm');
 var gameForm = document.getElementById('gameForm');
 
@@ -76,7 +76,7 @@ function tryFunction(evt) {
         isStarted = false;
         enableControlsByState(isStarted);
         level++;
-        updateUserStorage(user, level,points);
+        updateUserStorage(user, level, points);
         document.getElementById('level').innerText = level;
       } else {
         document.getElementById('response').innerHTML = `Numarul <b>${myTry}</b> este mai <b>${(myTry < numberToGuess) ? 'mic' : 'mare'}</b> decat cel la care ma gandesc.`;
@@ -84,10 +84,15 @@ function tryFunction(evt) {
         if (++tryNumber > maxTries) {
           document.getElementById('response').innerHTML = `Ai terminat munitia!!! eu ma gandeam la numarul ${numberToGuess}.`;
           document.getElementById('numberOfTry').innerText = '...';
-
-          isStarted = false;
+        
+          if (level > 3) {
+            level--;
+          } else {
+            isStarted = false;
+          }
           enableControlsByState(isStarted);
         }
+        
         triedNumbers.push(myTry);
       }
       document.getElementById('numberOfTry').innerText = tryNumber;
@@ -125,7 +130,7 @@ function cheatFunction(evt) {
 /**********************************************************************************************/
 function initFunction() {
   level = 0;
-  points=0;
+  points = 0;
   cheatedLevel = 0;
   isStarted = false;
   cheated = false;
