@@ -1,5 +1,5 @@
 const defaultUserName = "Anonymous";
-var userName = prompt("Sub ce nume joci", defaultUserName) || defaultUserName;
+var userName = prompt("Sub ce nume te joci?", defaultUserName) || defaultUserName;
 var user = getFromLocalStorage(userName);
 
 const message1 = `Bine ai intrat in joc <b>${userName}</b>!!!`;
