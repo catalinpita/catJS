@@ -232,8 +232,11 @@ function updateUserStorage(user, level, points) {
 
 function displayTimeProgress() {
 
-  var secondsElapsed = Math.ceil((new Date().getTime() - levelStartTime) / 1000);
-  document.getElementById('seconds').innerText = secondsElapsed;
+  const secondsElapsed = Math.ceil((new Date().getTime() - levelStartTime) / 1000);
+
+  const preposition = (secondsElapsed % 100 === 0 || (secondsElapsed % 100 > 19)) ? " de" : "";
+
+  document.getElementById('seconds').innerText = (secondsElapsed + preposition);
 
   var timePercentage = Math.floor((secondsElapsed * 100) / secondsToCompleteLevel);
 
@@ -254,8 +257,8 @@ function displayTimeProgress() {
     window.clearInterval(timer);
     levelStartTime.levelEndTime = new Date().getTime();
     isStarted = false;
-    enableControlsByState(isStarted);
     alert(`Ghinion... a zburat tot timpu'.`)
+    enableControlsByState(isStarted);
     timeProgressBar.classList.add('invisible');
     timeProgressBar.style = `width: ${0}%`;
   }
