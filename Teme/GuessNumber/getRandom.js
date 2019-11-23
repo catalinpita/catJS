@@ -2,7 +2,7 @@ const container = document.getElementById('container');
 container.style.backgroundColor = '#FFFFFF';
 container.style.minHeight = computeMaxHeight();
 
-const secondsToCompleteLevel = 180;
+const secondsToCompleteLevel = 25;
 const defaultUserName = "Anonymous";
 var userName = prompt("Sub ce nume te joci?", defaultUserName) || defaultUserName;
 var user = getFromLocalStorage(userName);
@@ -48,9 +48,15 @@ initFunction();
 function startFunction(evt) {
 
   if (isStarted === false) {
-    document.getElementById('timeProgressBar').classList.add('invisible');
+
+    
+ 
+    document.getElementById('timeProgressBar').classList.remove('bg-danger','bg-warning','bg-success');
+    document.getElementById('timeProgressBar').classList.add('invisible','collapsing');
     document.getElementById('timeProgressBar').style = `width: 0%`;
-    document.getElementById('timeProgressBar').classList.remove('invisible');
+    document.getElementById('timeProgressBar').classList.add('bg-success');
+    document.getElementById('timeProgressBar').classList.remove('invisible','collapsing');
+        
 
     document.getElementById('body').style.backgroundColor = getRandomColor();
     levelStartTime = (new Date()).getTime();
@@ -135,17 +141,17 @@ function cheatFunction(evt) {
   } else {
     if ((getRandomIntInRange(0, 100) % 7) !== 0) {
       const mgsNumber = getRandomIntInRange(0, 100) % 4 === 0 ? numberToGuess : getRandomIntInRange(0, upperRange);
-      alert(`Ingeri, strigoi, vârcolaci, poate chiar si niste draci\n
-       in cor shushteau.... ${mgsNumber}.\n
+      alert(`Ingeri, strigoi, vârcolaci, poate chiar si niste draci in cor shushoteau.... \n ${mgsNumber}.\n
        De te mint au ba afli cand vei incerca.`);
       cheated = true;
     } else {
+      levelStartTime.levelEndTime = new Date().getTime();
       alert(`Hehe! Sarpele zburator o zi zboara una nu, astzai nu mai zboara. Incearca poimâine! \n 
     Butonul insala mereu, uneori jocul, uneori pe tine...\n 
     Pe curand!`);
       isStarted = false;
       level = 1;
-      window.clearInterval(displayTimeProgress);
+      window.clearInterval(timer);
       document.getElementById('yourTries').innerText += ' pâna la urma ai trisat |:~))';
       document.getElementById('level').innerText = level;
       enableControlsByState(isStarted);
@@ -257,28 +263,30 @@ function displayTimeProgress() {
 
   document.getElementById('seconds').innerText = (secondsElapsed + preposition);
 
-  var timePercentage = Math.floor((secondsElapsed * 100) / secondsToCompleteLevel);
-
+  var timePercentage = parseInt(Math.floor((secondsElapsed * 100) / secondsToCompleteLevel));
+  
   const timeProgressBar = document.getElementById('timeProgressBar');
-
   timeProgressBar.classList.remove('invisible')
   timeProgressBar.style = `width: ${timePercentage}%`;
+
   if (timePercentage < 50) {
-    timeProgressBar.classList.remove('bg-danger');
     timeProgressBar.classList.add('bg-success');
+    timeProgressBar.classList.remove('bg-danger','bg-warning');
+
   } else if (timePercentage < 75) {
-    timeProgressBar.classList.remove('bg-success');
     timeProgressBar.classList.add('bg-warning');
   } else if (timePercentage < 100) {
-    timeProgressBar.classList.remove('bg-warnig');
+
     timeProgressBar.classList.add('bg-danger');
   } else {
     window.clearInterval(timer);
-    levelStartTime.levelEndTime = new Date().getTime();
+    levelEndTime = new Date().getTime();
     isStarted = false;
     alert(`Ghinion... a zburat tot timpu'.`)
     enableControlsByState(isStarted);
     timeProgressBar.classList.add('invisible');
+    timeProgressBar.classList.remove('bg-danger','bg-warning');
+    timeProgressBar.classList.add('bg-success');
     timeProgressBar.style = `width: ${0}%`;
   }
 }
