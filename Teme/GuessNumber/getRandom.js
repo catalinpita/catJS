@@ -137,7 +137,7 @@ function cheatFunction(evt) {
       const mgsNumber = getRandomIntInRange(0, 100) % 4 === 0 ? numberToGuess : getRandomIntInRange(0, upperRange);
       alert(`Ingeri, strigoi, vârcolaci, poate chiar si niste draci\n
        in cor shushteau.... ${mgsNumber}.\n
-        De te mint au ba afli cand vei incerca.`);
+       De te mint au ba afli cand vei incerca.`);
       cheated = true;
     } else {
       alert(`Hehe! Sarpele zburator o zi zboara una nu, astzai nu mai zboara. Incearca poimâine! \n 
@@ -145,9 +145,11 @@ function cheatFunction(evt) {
     Pe curand!`);
       isStarted = false;
       level = 1;
+      window.clearInterval(displayTimeProgress);
       document.getElementById('yourTries').innerText += ' pâna la urma ai trisat |:~))';
       document.getElementById('level').innerText = level;
-      enableControlsByState(isStarted)
+      enableControlsByState(isStarted);
+
     }
   }
   evt.preventDefault();
