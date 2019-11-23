@@ -2,7 +2,7 @@ const container = document.getElementById('container');
 container.style.backgroundColor = '#FFFFFF';
 container.style.minHeight = computeMaxHeight();
 
-const secondsToCompleteLevel = 25;
+const secondsToCompleteLevel = 180;
 const defaultUserName = "Anonymous";
 var userName = prompt("Sub ce nume te joci?", defaultUserName) || defaultUserName;
 var user = getFromLocalStorage(userName);
