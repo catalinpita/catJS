@@ -41,7 +41,7 @@ var game = {
 var isStarted;
 var cheated, cheatedLevel;
 var maxTries, upperRange;
-var numberToGuess;
+
 
 var tryNumber;
 var levelNr, points, levelStartTime, levelEndTime;
@@ -89,7 +89,7 @@ function startFunction(evt) {
     timer = window.setInterval(displayTimeProgress, 1000);
     maxTries = maxTriesInput.value;
     upperRange = parseInt(upperRangeInput.value);
-    numberToGuess = Math.ceil(getRandomIntInRange(0, upperRange));
+    level.numberToGuess = Math.ceil(getRandomIntInRange(0, upperRange));
    level.triedNumbers = [];
     isStarted = true;
     tryNumber = 1;
@@ -115,7 +115,7 @@ function tryFunction(evt) {
       alert(`Psssst ma gandesc la un numar intre 0 si ${upperRange}.`);
 
     } else if (notTriedYet(level.triedNumbers, myTry)) {
-      if (myTry === numberToGuess) {
+      if (myTry === level.numberToGuess) {
         document.getElementById('response').innerHTML = `Bravo, ai ghicit! <b>${myTry}</b> este numarul la care m-am gandit.`;
         isStarted = false;
         enableControlsByState(isStarted);
@@ -125,10 +125,10 @@ function tryFunction(evt) {
         window.clearInterval(timer);
         levelStartTime.levelEndTime = new Date().getTime();
       } else {
-        document.getElementById('response').innerHTML = `Numarul <b>${myTry}</b> este mai <b>${(myTry < numberToGuess) ? 'mic' : 'mare'}</b> decat cel la care ma gandesc.`;
+        document.getElementById('response').innerHTML = `Numarul <b>${myTry}</b> este mai <b>${(myTry < level.numberToGuess) ? 'mic' : 'mare'}</b> decat cel la care ma gandesc.`;
 
         if (++tryNumber > maxTries) {
-          document.getElementById('response').innerHTML = `Ai terminat munitia!!! eu ma gandeam la numarul ${numberToGuess}.`;
+          document.getElementById('response').innerHTML = `Ai terminat munitia!!! eu ma gandeam la numarul ${level.numberToGuess}.`;
           document.getElementById('numberOfTry').innerText = '...';
 
           if (levelNr > 3) {
@@ -157,12 +157,12 @@ function cheatFunction(evt) {
   if (levelNr === 1 && level.triedNumbers.length === 0) {
     alert("Serios!?! Chiar asa, din prima? |:-(>)");
   } else if (cheated === false || levelNr === cheatedLevel) {
-    alert(`Si vântul shoptea.... ${numberToGuess}.`);
+    alert(`Si vântul shoptea.... ${level.numberToGuess}.`);
     cheated = true;
     cheatedLevel = levelNr;
   } else {
     if ((getRandomIntInRange(0, 100) % 7) !== 0) {
-      const mgsNumber = getRandomIntInRange(0, 100) % 4 === 0 ? numberToGuess : getRandomIntInRange(0, upperRange);
+      const mgsNumber = getRandomIntInRange(0, 100) % 4 === 0 ?level.numberToGuess : getRandomIntInRange(0, upperRange);
       alert(`Ingeri, strigoi, vârcolaci, poate chiar si niste draci in cor shushoteau.... \n ${mgsNumber}.\n
        De te mint au ba afli cand vei incerca.`);
       cheated = true;
@@ -192,7 +192,7 @@ function initFunction() {
   cheated = false;
   maxTries = 0;
   upperRange = 0;
-  numberToGuess = 0;
+  level.numberToGuess = 0;
   level.triedNumbers = [];
   tryNumber = 1;
 
