@@ -22,7 +22,7 @@ var maxTries, upperRange;
 var numberToGuess;
 var triedNumbers;
 var tryNumber;
-var level, points, levelStartTime, levelEndTime;
+var levelNr, points, levelStartTime, levelEndTime;
 var settingsForm = document.getElementById('settingsForm');
 var gameForm = document.getElementById('gameForm');
 
@@ -49,21 +49,21 @@ function startFunction(evt) {
 
   if (isStarted === false) {
 
-    
- 
-    document.getElementById('timeProgressBar').classList.remove('bg-danger','bg-warning','bg-success');
-    document.getElementById('timeProgressBar').classList.add('invisible','collapsing');
+
+
+    document.getElementById('timeProgressBar').classList.remove('bg-danger', 'bg-warning', 'bg-success');
+    document.getElementById('timeProgressBar').classList.add('invisible', 'collapsing');
     document.getElementById('timeProgressBar').style = `width: 0%`;
     document.getElementById('timeProgressBar').classList.add('bg-success');
-    document.getElementById('timeProgressBar').classList.remove('invisible','collapsing');
-        
+    document.getElementById('timeProgressBar').classList.remove('invisible', 'collapsing');
+
 
     document.getElementById('body').style.backgroundColor = getRandomColor();
     levelStartTime = (new Date()).getTime();
-    if (level == 0)
-      level++;
+    if (levelNr == 0)
+      levelNr++;
 
-    document.getElementById('level').innerText = level;
+    document.getElementById('level').innerText = levelNr;
     timer = window.setInterval(displayTimeProgress, 1000);
     maxTries = maxTriesInput.value;
     upperRange = parseInt(upperRangeInput.value);
@@ -97,9 +97,9 @@ function tryFunction(evt) {
         document.getElementById('response').innerHTML = `Bravo, ai ghicit! <b>${myTry}</b> este numarul la care m-am gandit.`;
         isStarted = false;
         enableControlsByState(isStarted);
-        level++;
-        updateUserStorage(user, level, points);
-        document.getElementById('level').innerText = level;
+        levelNr++;
+        updateUserStorage(user, levelNr, points);
+        document.getElementById('level').innerText = levelNr;
         window.clearInterval(timer);
         levelStartTime.levelEndTime = new Date().getTime();
       } else {
@@ -109,7 +109,7 @@ function tryFunction(evt) {
           document.getElementById('response').innerHTML = `Ai terminat munitia!!! eu ma gandeam la numarul ${numberToGuess}.`;
           document.getElementById('numberOfTry').innerText = '...';
 
-          if (level > 3) {
+          if (levelNr > 3) {
             level--;
           } else {
             isStarted = false;
@@ -132,12 +132,12 @@ function tryFunction(evt) {
 /**********************************************************************************************/
 function cheatFunction(evt) {
 
-  if (level === 1 && triedNumbers.length === 0) {
+  if (levelNr === 1 && triedNumbers.length === 0) {
     alert("Serios!?! Chiar asa, din prima? |:-(>)");
-  } else if (cheated === false || level === cheatedLevel) {
+  } else if (cheated === false || levelNr === cheatedLevel) {
     alert(`Si vântul shoptea.... ${numberToGuess}.`);
     cheated = true;
-    cheatedLevel = level;
+    cheatedLevel = levelNr;
   } else {
     if ((getRandomIntInRange(0, 100) % 7) !== 0) {
       const mgsNumber = getRandomIntInRange(0, 100) % 4 === 0 ? numberToGuess : getRandomIntInRange(0, upperRange);
@@ -150,10 +150,10 @@ function cheatFunction(evt) {
     Butonul insala mereu, uneori jocul, uneori pe tine...\n 
     Pe curand!`);
       isStarted = false;
-      level = 1;
+      levelNr = 1;
       window.clearInterval(timer);
       document.getElementById('yourTries').innerText += ' pâna la urma ai trisat |:~))';
-      document.getElementById('level').innerText = level;
+      document.getElementById('level').innerText = levelNr;
       enableControlsByState(isStarted);
 
     }
@@ -163,7 +163,7 @@ function cheatFunction(evt) {
 
 /**********************************************************************************************/
 function initFunction() {
-  level = 0;
+  levelNr = 0;
   points = 0;
   cheatedLevel = 0;
   isStarted = false;
@@ -178,7 +178,7 @@ function initFunction() {
   document.getElementById('response').innerHTML = '';
   document.getElementById('numberOfTry').innerText = '1';
   document.getElementById('yourTries').innerText = '';
-  document.getElementById('level').innerText = level;
+  document.getElementById('level').innerText = levelNr;
 
 }
 
@@ -237,10 +237,10 @@ function getFromLocalStorage(userName) {
 }
 
 /**********************************************************************************************/
-function updateUserStorage(user, level, points) {
+function updateUserStorage(user, levelNr, points) {
   var isLevelRecord = false;
-  if (level > user.maxLevel) {
-    user.maxLevel = level;
+  if (levelNr > user.maxLevel) {
+    user.maxLevel = levelNr;
     isLevelRecord = true;
     alert(`Super ${user.name}, ai depasit recordul nivelelor.`)
   }
@@ -264,14 +264,14 @@ function displayTimeProgress() {
   document.getElementById('seconds').innerText = (secondsElapsed + preposition);
 
   var timePercentage = parseInt(Math.floor((secondsElapsed * 100) / secondsToCompleteLevel));
-  
+
   const timeProgressBar = document.getElementById('timeProgressBar');
   timeProgressBar.classList.remove('invisible')
   timeProgressBar.style = `width: ${timePercentage}%`;
 
   if (timePercentage < 50) {
     timeProgressBar.classList.add('bg-success');
-    timeProgressBar.classList.remove('bg-danger','bg-warning');
+    timeProgressBar.classList.remove('bg-danger', 'bg-warning');
 
   } else if (timePercentage < 75) {
     timeProgressBar.classList.add('bg-warning');
@@ -285,7 +285,7 @@ function displayTimeProgress() {
     alert(`Ghinion... a zburat tot timpu'.`)
     enableControlsByState(isStarted);
     timeProgressBar.classList.add('invisible');
-    timeProgressBar.classList.remove('bg-danger','bg-warning');
+    timeProgressBar.classList.remove('bg-danger', 'bg-warning');
     timeProgressBar.classList.add('bg-success');
     timeProgressBar.style = `width: ${0}%`;
   }
