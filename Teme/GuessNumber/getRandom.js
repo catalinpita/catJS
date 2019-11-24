@@ -1,6 +1,12 @@
 const container = document.getElementById('container');
 container.style.backgroundColor = '#FFFFFF';
 container.style.minHeight = computeMaxHeight();
+container.style.display='flex';
+
+// container.style.alignItems='center';
+container.style.justifyContent= 'center';
+
+// document.getElementById('settingsForm').style.flex='center';
 
 const secondsToCompleteLevel = 180;
 const defaultUserName = "Anonymous";
@@ -45,8 +51,7 @@ var maxTries, upperRange;
 
 var tryNumber;
 var levelNr, points, levelStartTime, levelEndTime;
-var settingsForm = document.getElementById('settingsForm');
-var gameForm = document.getElementById('gameForm');
+
 
 var maxTriesInput = document.getElementById('maxTries');
 var upperRangeInput = document.getElementById('upperRange');
@@ -57,9 +62,9 @@ var startButton = document.getElementById('startButton');
 var tryButton = document.getElementById('tryButton');
 var cheatButton = document.getElementById('cheatButton');
 
-settingsForm.addEventListener("submit", startFunction);
+document.getElementById('settingsForm').addEventListener("submit", startFunction);
+document.getElementById('gameForm').addEventListener("submit", tryFunction);
 
-gameForm.addEventListener("submit", tryFunction);
 cheatButton.addEventListener("click", cheatFunction);
 
 var timer;
