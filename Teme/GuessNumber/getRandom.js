@@ -16,6 +16,28 @@ document.getElementById('userEntrance').innerHTML = ((user.maxLevel == 0) ? mess
 const message3 = `Recordul tau este de <b>${user.maxPoints}</b> puncte si <b>${user.maxLevel}</b> nivele!`;
 document.getElementById('userPerformance').innerHTML = user.maxLevel == 0 ? "" : message3;
 
+var level = {
+  number: 0,
+  numberToguess: '',
+  currentTry: '',
+  triedNumbers: [],
+  points: 0,
+  stratTime: 0,
+  endTime: 0,
+  cheated: false,
+  pauseTime: 0
+}
+
+var game = {
+  maxTries: 0,
+  startInterval: 0,
+  endInterval: 0,
+  level: 0,
+  points: 0,
+  startTime: 0,
+  endTime: 0
+}
+
 var isStarted;
 var cheated, cheatedLevel;
 var maxTries, upperRange;
