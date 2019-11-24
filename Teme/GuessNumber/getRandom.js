@@ -42,7 +42,7 @@ var isStarted;
 var cheated, cheatedLevel;
 var maxTries, upperRange;
 var numberToGuess;
-var triedNumbers;
+
 var tryNumber;
 var levelNr, points, levelStartTime, levelEndTime;
 var settingsForm = document.getElementById('settingsForm');
@@ -90,7 +90,7 @@ function startFunction(evt) {
     maxTries = maxTriesInput.value;
     upperRange = parseInt(upperRangeInput.value);
     numberToGuess = Math.ceil(getRandomIntInRange(0, upperRange));
-    triedNumbers = [];
+   level.triedNumbers = [];
     isStarted = true;
     tryNumber = 1;
 
@@ -114,7 +114,7 @@ function tryFunction(evt) {
     if (myTry > upperRange) {
       alert(`Psssst ma gandesc la un numar intre 0 si ${upperRange}.`);
 
-    } else if (notTriedYet(triedNumbers, myTry)) {
+    } else if (notTriedYet(level.triedNumbers, myTry)) {
       if (myTry === numberToGuess) {
         document.getElementById('response').innerHTML = `Bravo, ai ghicit! <b>${myTry}</b> este numarul la care m-am gandit.`;
         isStarted = false;
@@ -139,10 +139,10 @@ function tryFunction(evt) {
           enableControlsByState(isStarted);
         }
 
-        triedNumbers.push(myTry);
+        level.triedNumbers.push(myTry);
       }
       document.getElementById('numberOfTry').innerText = tryNumber;
-      document.getElementById('yourTries').innerText = triedNumbers;
+      document.getElementById('yourTries').innerText = level.triedNumbers;
     } else {
       alert(`Ai mai incercat numarul ${myTry}.`);
     }
@@ -154,7 +154,7 @@ function tryFunction(evt) {
 /**********************************************************************************************/
 function cheatFunction(evt) {
 
-  if (levelNr === 1 && triedNumbers.length === 0) {
+  if (levelNr === 1 && level.triedNumbers.length === 0) {
     alert("Serios!?! Chiar asa, din prima? |:-(>)");
   } else if (cheated === false || levelNr === cheatedLevel) {
     alert(`Si vântul shoptea.... ${numberToGuess}.`);
@@ -193,7 +193,7 @@ function initFunction() {
   maxTries = 0;
   upperRange = 0;
   numberToGuess = 0;
-  triedNumbers = [];
+  level.triedNumbers = [];
   tryNumber = 1;
 
   enableControlsByState(isStarted);
