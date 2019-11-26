@@ -7,8 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
-  >
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <style>
     #settingsForm {
@@ -18,19 +17,19 @@
     .no-transition {
       transition: none !important;
     }
-  </style>  
+  </style>
 </head>
 
 <body id="body">
 
 
   <div id="container" class="container">
-    <form id="settingsForm" class="font-weight-bold">
+    <div class="col-12">
+      <form id="settingsForm" class="font-weight-bold container">
 
-      <div class="col-12 container">
         <div class="row">
-          <div class="col container">
-            <h1>Ghiceste la ce numar ma gândesc!</h1>
+          <div class="col">
+            <h1 class="text-center">Ghiceste la ce numar ma gândesc!</h1>
           </div>
         </div>
 
@@ -83,68 +82,83 @@
           </div>
         </div>
 
-    </form>
+      </form>
 
-    <form id="gameForm" class="mt-1">
-      <div class="row">
-        <div class="col-6">
-          <p id="tryNumber">Incercarea <span id="numberOfTry"></span>:
-            <label for="myTry">Cred ca te gândesti la...</label></p>
-        </div>
-        <div class="col-6">
-          <input type="number" id="currentTry" name="myTry" min="0">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-6">
-          <button class="btn btn-success btn-block" id="tryButton" type="submit">Am ghicit?</button>
-        </div>
-        <div class="col-6">
-          <button class="btn btn-danger btn-block" id="cheatButton" type="button">Triseaza!</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12"><br>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <h4 id="response"></h4>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12"><br>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="col-12">
-          <h4>Ai incercat numerele: <span id="yourTries"></span></h4>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12"><br>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <h6 class="text-secondary">Trecura <span id="seconds">0</span> secunde din <span id="timeLimit"></span></h6>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col">
-          <div class="progress">
-            <div id="timeProgressBar" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      <form id="gameForm" class="mt-1 container">
+        <div class="row">
+          <div class="col-6">
+            <p id="tryNumber">Incercarea <span id="numberOfTry"></span>:
+              <label for="myTry">Cred ca te gândesti la...</label></p>
+          </div>
+          <div class="col-6">
+            <input type="number" id="currentTry" name="myTry" min="0">
           </div>
         </div>
-      </div>
 
-  </div>
-  </form>
+        <div class="row">
+          <div class="col-6">
+            <button class="btn btn-success btn-block" id="tryButton" type="submit">Am ghicit?</button>
+          </div>
+          <div class="col-6">
+            <button class="btn btn-danger btn-block" id="cheatButton" type="button">Triseaza!</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12"><br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <h4 id="response"></h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12"><br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <h4>Ai incercat numerele: <span id="yourTries"></span></h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12"><br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <h6 class="text-secondary">Trecura <span id="seconds">0</span> secunde din <span id="timeLimit"></span></h6>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="progress">
+              <div id="timeProgressBar" class="progress-bar bg-success" role="progressbar" style="width: 0%"
+                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-secondary" id="pauseButton" type="button">Pauza...</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 
 
