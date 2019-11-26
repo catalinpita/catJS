@@ -1,9 +1,12 @@
+const timeProgressBar = document.getElementById('timeProgressBar');
+const transitionSettings = timeProgressBar.style.transition;
+
 const container = document.getElementById('container');
 container.style.backgroundColor = '#FFFFFF';
 container.style.minHeight = computeMaxHeight();
 container.style.display = 'flex';
 
-container.style.alignItems='center';
+container.style.alignItems = 'center';
 container.style.justifyContent = 'center';
 
 // document.getElementById('settingsForm').style.flex='center';
@@ -79,11 +82,13 @@ function startFunction(evt) {
 
 
 
-    document.getElementById('timeProgressBar').classList.remove('bg-danger', 'bg-warning', 'bg-success');
-    document.getElementById('timeProgressBar').classList.add('invisible', 'collapsing');
-    document.getElementById('timeProgressBar').style = `width: 0%`;
-    document.getElementById('timeProgressBar').classList.add('bg-success');
-    document.getElementById('timeProgressBar').classList.remove('invisible', 'collapsing');
+    timeProgressBar.classList.remove('bg-danger', 'bg-warning', 'bg-success');
+    // timeProgressBar.classList.add('invisible', 'collapsing');
+    timeProgressBar.classList.add('no-transition');
+    timeProgressBar.style = `width: 0%`;
+    timeProgressBar.classList.remove('no-transtion');
+    // timeProgressBar.classList.add('bg-success');
+    // timeProgressBar.classList.remove('invisible', 'collapsing');
 
 
     document.getElementById('body').style.backgroundColor = getRandomColor();
