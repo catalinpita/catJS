@@ -32,7 +32,7 @@ var level = {
   currentTry: '',
   triedNumbers: [],
   points: 0,
-  stratTime: 0,
+  startTime: 0,
   endTime: 0,
   cheated: false,
   pauseTime: 0
@@ -54,26 +54,41 @@ var maxTries, upperRange;
 
 
 var tryNumber;
-var levelNr, points, levelStartTime, levelEndTime;
+var levelNr, points,  levelEndTime;
 
 
 var maxTriesInput = document.getElementById('maxTries');
-var upperRangeInput = document.getElementById('upperRange');
+const upperRangeInput = document.getElementById('upperRange');
 
-var currentTryInput = document.getElementById('currentTry');
+const currentTryInput = document.getElementById('currentTry');
 
-var startButton = document.getElementById('startButton');
-var tryButton = document.getElementById('tryButton');
-var cheatButton = document.getElementById('cheatButton');
+const startButton = document.getElementById('startButton');
+const tryButton = document.getElementById('tryButton');
+const cheatButton = document.getElementById('cheatButton');
+const pauseButton = document.getElementById('pauseButton');
 
 document.getElementById('settingsForm').addEventListener("submit", startFunction);
 document.getElementById('gameForm').addEventListener("submit", tryFunction);
 
 cheatButton.addEventListener("click", cheatFunction);
+pauseButton.addEventListener("click", pauseFunction);
 
 var timer;
 initFunction();
 
+/**********************************************************************************************/
+function pauseFunction(evt) {
+  
+  if (isStarted === true) {
+    const pauseStartTime= new Date();
+    alert("Bea ceiutul, plimba câinele... dar intoarce-te repede si apasa OK.");
+    const pauseDuration=new Date()-pauseStartTime;
+    
+    level.startTime+=pauseDuration;
+    
+  }
+  evt.preventDefault();
+}
 /**********************************************************************************************/
 
 function startFunction(evt) {
@@ -92,7 +107,7 @@ function startFunction(evt) {
 
 
     document.getElementById('body').style.backgroundColor = getRandomColor();
-    levelStartTime = (new Date()).getTime();
+    level.startTime = (new Date()).getTime();
     if (levelNr == 0)
       levelNr++;
 
@@ -134,7 +149,7 @@ function tryFunction(evt) {
         updateUserStorage(user, levelNr, points);
         document.getElementById('level').innerText = levelNr;
         window.clearInterval(timer);
-        levelStartTime.levelEndTime = new Date().getTime();
+        level.startTime.levelEndTime = new Date().getTime();
       } else {
         document.getElementById('response').innerHTML = `Numarul <b>${myTry}</b> este mai <b>${(myTry < level.numberToGuess) ? 'mic' : 'mare'}</b> decat cel la care ma gandesc.`;
 
@@ -178,7 +193,7 @@ function cheatFunction(evt) {
        De te mint au ba afli cand vei incerca.`);
       cheated = true;
     } else {
-      levelStartTime.levelEndTime = new Date().getTime();
+      level.levelEndTime = new Date().getTime();
       alert(`Hehe! Sarpele zburator o zi zboara una nu, astzai nu mai zboara. Incearca poimâine! \n 
     Butonul insala mereu, uneori jocul, uneori pe tine...\n 
     Pe curand!`);
@@ -203,6 +218,8 @@ function initFunction() {
   cheated = false;
   maxTries = 0;
   upperRange = 0;
+  level.startTime=0;
+  level.endTime=0;
   level.numberToGuess = 0;
   level.triedNumbers = [];
   tryNumber = 1;
@@ -290,7 +307,7 @@ function updateUserStorage(user, levelNr, points) {
 
 function displayTimeProgress() {
 
-  const secondsElapsed = Math.ceil((new Date().getTime() - levelStartTime) / 1000);
+  const secondsElapsed = Math.ceil((new Date().getTime() - level.startTime) / 1000);
 
   const displayedTime = Math.min(secondsElapsed, secondsToCompleteLevel);
   const preposition = (displayedTime % 100 === 0 || (displayedTime % 100 > 19)) ? " de" : "";
