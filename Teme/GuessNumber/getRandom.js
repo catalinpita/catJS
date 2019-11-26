@@ -1,14 +1,15 @@
 const container = document.getElementById('container');
 container.style.backgroundColor = '#FFFFFF';
 container.style.minHeight = computeMaxHeight();
-container.style.display='flex';
+container.style.display = 'flex';
 
-// container.style.alignItems='center';
-container.style.justifyContent= 'center';
+container.style.alignItems='center';
+container.style.justifyContent = 'center';
 
 // document.getElementById('settingsForm').style.flex='center';
 
 const secondsToCompleteLevel = 180;
+document.getElementById("timeLimit").innerText = ` ${secondsToCompleteLevel}`;
 const defaultUserName = "Anonymous";
 var userName = prompt("Sub ce nume te joci?", defaultUserName) || defaultUserName;
 var user = getFromLocalStorage(userName);
@@ -91,11 +92,11 @@ function startFunction(evt) {
       levelNr++;
 
     document.getElementById('level').innerText = levelNr;
-    timer = window.setInterval(displayTimeProgress, 1000);
+    timer = window.setInterval(displayTimeProgress, 300);
     maxTries = maxTriesInput.value;
     upperRange = parseInt(upperRangeInput.value);
     level.numberToGuess = Math.ceil(getRandomIntInRange(0, upperRange));
-   level.triedNumbers = [];
+    level.triedNumbers = [];
     isStarted = true;
     tryNumber = 1;
 
@@ -114,7 +115,7 @@ function tryFunction(evt) {
 
   const myTry = parseInt(currentTryInput.value);
   if (isNaN(myTry)) {
-    //nothing to do;
+    alert("Ehhh...");
   } else if (isStarted === true) {
     if (myTry > upperRange) {
       alert(`Psssst ma gandesc la un numar intre 0 si ${upperRange}.`);
@@ -167,7 +168,7 @@ function cheatFunction(evt) {
     cheatedLevel = levelNr;
   } else {
     if ((getRandomIntInRange(0, 100) % 7) !== 0) {
-      const mgsNumber = getRandomIntInRange(0, 100) % 4 === 0 ?level.numberToGuess : getRandomIntInRange(0, upperRange);
+      const mgsNumber = getRandomIntInRange(0, 100) % 4 === 0 ? level.numberToGuess : getRandomIntInRange(0, upperRange);
       alert(`Ingeri, strigoi, vârcolaci, poate chiar si niste draci in cor shushoteau.... \n ${mgsNumber}.\n
        De te mint au ba afli cand vei incerca.`);
       cheated = true;
@@ -286,9 +287,10 @@ function displayTimeProgress() {
 
   const secondsElapsed = Math.ceil((new Date().getTime() - levelStartTime) / 1000);
 
-  const preposition = (secondsElapsed % 100 === 0 || (secondsElapsed % 100 > 19)) ? " de" : "";
+  const displayedTime = Math.min(secondsElapsed, secondsToCompleteLevel);
+  const preposition = (displayedTime % 100 === 0 || (displayedTime % 100 > 19)) ? " de" : "";
 
-  document.getElementById('seconds').innerText = (secondsElapsed + preposition);
+  document.getElementById('seconds').innerText = (displayedTime + preposition);
 
   var timePercentage = parseInt(Math.floor((secondsElapsed * 100) / secondsToCompleteLevel));
 
@@ -302,7 +304,7 @@ function displayTimeProgress() {
 
   } else if (timePercentage < 75) {
     timeProgressBar.classList.add('bg-warning');
-  } else if (timePercentage < 100) {
+  } else if (timePercentage <= 100) {
 
     timeProgressBar.classList.add('bg-danger');
   } else {
