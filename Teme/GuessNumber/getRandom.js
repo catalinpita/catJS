@@ -4,6 +4,7 @@ const transitionSettings = timeProgressBar.style.transition;
 const container = document.getElementById('container');
 container.style.backgroundColor = '#FFFFFF';
 container.style.minHeight = computeMaxHeight();
+container.style.maxWidth= '900px';
 container.style.display = 'flex';
 
 container.style.alignItems = 'center';
