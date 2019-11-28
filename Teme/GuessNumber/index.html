@@ -25,7 +25,7 @@
 
   <div id="container" class="container">
     <div class="col-12">
-      <form id="settingsForm" class="font-weight-bold container">
+      <form id="settingsForm" class="mt-1 font-weight-bold container">
 
         <div class="row">
           <div class="col">
@@ -58,20 +58,20 @@
         </div>
 
         <div class="row">
-          <div class="col-4">
+          <div class="col-4 text-right">
             <label for="maxTries">Cât de norocos esti? </label>
           </div>
           <div class="col-4 text-center">
             <input type="number" id="maxTries" name="maxTries" placeholder="10" min="3" max="100" value="10">
           </div>
           <div class="col-4">
-            <p>(numarul de incercari)</p>
+            <p class="text-left">(numarul de incercari)</p>
           </div>
         </div>
 
         <div class="row">
           <div class="col">
-            <label for="upperRange">Maximum la care ma pot gândi</label>
+            <label for="upperRange">Maximum la care ma pot gândi </label>
             <input type="number" id="upperRange" name="upperRange" placeholder="100" min="30" max="100" value="50">
           </div>
         </div>
@@ -156,11 +156,28 @@
           <div class="col">
             <button class="btn btn-outline-warning btn-sm" id="pauseButton" type="button">Vreau pauza...</button>
 
-            <button class="btn btn-outline-secondary btn-sm" id="resetButton" type="button" onclick="alert('Apesi degeaba, inca nu fac nimic...');">Hai de la inceput!</button>
+            <button class="btn btn-outline-secondary btn-sm" id="resetButton" type="button"
+              onclick="alert('Apesi degeaba, inca nu fac nimic...\nva functiona dupa code refactor');">Hai de la
+              inceput!</button>
 
-            <button class="btn btn-outline-info btn-sm" id="infoButton" type="button" onclick="alert('Prea vrei sa le shti pe toate!');">Despre joc!</button>
+            <button class="btn btn-outline-info btn-sm" id="infoButton" type="button"
+              onclick="alert('Prea vrei sa le shti pe toate!');">Despre joc!</button>
           </div>
         </div>
+
+        <div class="row text-center">
+          <div class="col">
+            <br>
+            <br>
+          </div>
+        </div>
+
+        <div class="row text-center">
+          <div class="col">
+            <button class="btn btn-outline-ligth btn-sm" id="helpButton" type="button">Ajuta-ma!</button>
+          </div>
+        </div>
+
       </form>
     </div>
   </div>

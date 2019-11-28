@@ -96,8 +96,6 @@ function startFunction(evt) {
 
   if (isStarted === false) {
 
-
-
     timeProgressBar.classList.remove('bg-danger', 'bg-warning', 'bg-success');
     // timeProgressBar.classList.add('invisible', 'collapsing');
     timeProgressBar.classList.add('no-transition');
