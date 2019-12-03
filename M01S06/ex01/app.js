@@ -8,7 +8,9 @@ let car = {
   topSpeed: 160,
   topReverseSpeed: -50,
   turnLightsOn: function () { this.areLigtsOn = true; },
+
   turnLightsOff: function () { this.areLigtsOn = false; },
+
   setSpeed: function (speed) {
     if (speed >= this.topReverseSpeed && speed <= this.topSpeed) {
       this.speed = speed;

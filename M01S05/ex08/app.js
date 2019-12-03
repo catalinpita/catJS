@@ -18,5 +18,5 @@ queryButton.addEventListener('click', () => {
   let message=`Ai ${age} ani`;
   console.log(message);
   messageParagraph.innerText=message;
-
+button.click();
 });
