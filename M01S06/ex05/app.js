@@ -2,6 +2,16 @@
   document.addEventListener('DOMContentLoaded', () => {
     const showButton = document.querySelector('#showButton');
     const toggleEventButton = document.querySelector('#toggleEventButton');
+    const removeButtonsButton = document.querySelector('#removeButtonsButton');
+
+    removeButtonsButton.addEventListener('click', () => {
+      if (eventBound) {
+        showButton.removeEventListener('click', showAlert);
+      };
+      showButton.remove();
+      toggleEventButton.remove();
+      removeButtonsButton.remove();
+    });
 
     const showAlert = () => {
       alert('Apasat');
