@@ -5,6 +5,9 @@
     const removeButtonsButton = document.querySelector('#removeButtonsButton');
 
     removeButtonsButton.addEventListener('click', () => {
+      if(!confirm('sigur le stergi?')){
+        return;
+      }
       if (eventBound) {
         showButton.removeEventListener('click', showAlert);
       };
@@ -46,3 +49,7 @@
     });
   });
 })();
+
+const domLog=console.log;
+
+domLog('bla bla');
