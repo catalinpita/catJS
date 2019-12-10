@@ -1,0 +1,84 @@
+.frame {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #000;
+  position: absolute; 
+}
+
+.car {
+  position: absolute; 
+  bottom: 70px;
+  left: 10px;
+}
+
+.car__body {
+  width: 180px;
+  height: 45px;
+  background-color: #000;
+  position: absolute;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.car__top {
+  background-color: #000;
+  width: 130px;
+  height: 45px;
+  position: absolute;
+  bottom: -10px;
+  left: 20px;
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
+}
+
+.car__wheel {
+  position: absolute; 
+  bottom: -20px;
+}
+
+.car__wheel--back {
+  left: 10px;
+}
+
+.car__wheel--front {
+  right: 10px;
+}
+
+.wheel {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  border-radius: 25px;
+  border: 1px solid #FFF;
+}
+
+.wheel__cap {
+  color: #FFF;
+  width: 20px;
+  height: 20px;
+  background-color: #FFF;
+  border-radius: 15px;
+}
+
+.light {
+  position: absolute; 
+  width: 15px;
+  height: 15px; 
+  background-color: #FFF; 
+  border-radius: 10px;
+}
+
+.light--front {
+  right: 0;
+}
+
+.light--front.light--on {
+  background-color: #ffeb3b;
+}
+
+.light--back.light--on {
+  background-color: #F00;
+}

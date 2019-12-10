@@ -1,0 +1,17 @@
+.shape {
+  position: absolute; 
+  top: 10; 
+  left: 10; 
+  border: 1px solid #000; 
+}
+
+.shape--rectangle {
+  width: 50px; 
+  height: 100px;
+}
+
+.shape--circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+}
