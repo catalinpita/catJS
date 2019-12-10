@@ -49,7 +49,3 @@
     });
   });
 })();
-
-const domLog=console.log;
-
-domLog('bla bla');
