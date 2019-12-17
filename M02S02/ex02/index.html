@@ -1,32 +1,50 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <title>Person Form</title>        
+  <meta charset="utf-8">
+  <title>Person Form</title>
 </head>
+
 <body>
   <form id="personForm">
     <fieldset>
       <legend>Persoana</legend>
       <label for="name">Nume:</label>
-      <input type="text" name="name"> 
-        
+      <input type="text" name="name">
+
       <br><br>
 
       <label for="surname">Prenume:</label>
-      <input type="text" name="surname"> 
+      <input type="text" name="surname">
 
       <br><br>
 
       <label for="age">Varsta</label>
-      <input type="text" name="age">    
-      
+      <input type="text" name="age">
+
       <br><br>
+      <label for="skill">Adauga skill</label>
+      <input type="text" name="skillInput" id="skillInput">
+      <button type="button" id="addSkillButton">+</button>
+      <br><br>
+
+
+      <input type="checkbox" name="hasPets" id="hasPets">
+      <label for="hasPets">Are animale de casa?</label>
 
       <button type="submit">Adauga</button>
     </fieldset>
 
-    <fieldset>
+    <fieldset id="pet">
+      <legend>Pet details</legend>
+      <label for="petName">Numele animalului</label>
+      <input type="text" id="petName">
+      <button type="button" id="addPetButton">+</button>
+    </fieldset>
+
+    </fieldset>
+    <fieldset id="details">
       <legend>Detalii</legend>
     </fieldset>
   </form>
@@ -34,4 +52,5 @@
   <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>
