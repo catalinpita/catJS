@@ -4,15 +4,24 @@ let addSkillButtton = document.getElementById('addSkillButton');
 let skillInput = document.getElementById('skillInput');
 let petSwitch = document.getElementById('hasPets');
 let petFieldSet = document.getElementById('pet');
+
 let petNameInput = document.getElementById('petName');
+let petSpeciesInput = document.getElementById('petSpecies');
+let petAgeInput = document.getElementById('petAge');
+
+
 let addPetButton = document.getElementById('addPetButton');
 
 let person;
 
 class Pet {
-  constructor(petName) {
+  constructor(petName,species,petAge) {
+
     this.name = petName;
+    this.species=species;
+    this. age=petAge;
   }
+
 };
 
 class Person {
@@ -54,7 +63,7 @@ class Person {
     let petsList = document.createElement('ol');
     this.pets.forEach((pet) => {
       let petLi = document.createElement('li');
-      petLi.innerText = `Nume: ${pet.name} specie vasta`;
+      petLi.innerText = `Animalutul  ${pet.name} este ${pet.species} si are ${pet.age}  (de) ani`;
       petsList.appendChild(petLi);
     });
     this.container.appendChild(petsList);
@@ -92,9 +101,11 @@ addSkillButtton.addEventListener('click', () => {
 
 addPetButton.addEventListener('click', (evt) => {
   let petName = petNameInput.value;
+  let petSpecies = petSpeciesInput.value;
+  let petAge = petAgeInput.value;
 
   if (petName.trim().length > 0) {
-    let pet = new Pet(petName);
+    let pet = new Pet(petName, petSpecies,petAge);
     person.addPet(pet);
     person.render();
   }
