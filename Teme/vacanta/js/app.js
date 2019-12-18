@@ -1,7 +1,7 @@
 class Person {
   constructor(name, surname) {
-    this.name = name;
-    this.surname = surname;
+    this.name = toStartingCapitals(name.trim());
+    this.surname = surname.trim().toUpperCase();
   }
 
   equals(person) {
@@ -18,28 +18,46 @@ const extractWinnerButton = document.getElementById('extractWinnerButton');
 const personsListElement = document.getElementById('personsList');
 
 addPersonButton.addEventListener('click', (evt) => {
+  const newPerson = buildPerson();
 
-  personsList.push(buildPerson());
-  displayPersonsList();
+  let personAllreadyAdded = false;
+  for (let index = 0; index < personsList.length; index++) {
+    if (personsList[index].equals(newPerson)) {
+      personAllreadyAdded = true;
+      break;
+    }
+  }
+  if (!personAllreadyAdded) {
+    personsList.push(newPerson);
+    displayPersonsList();
+  } else {
+    alert(`${newPerson.name} ${newPerson.surname} s-a inscris deja`);
+  }
   evt.preventDefault();
 });
 
 removePersonButton.addEventListener('click', (evt) => {
 
   const personToRemove = buildPerson();
-
   let remainingPersonsList = personsList.filter((element) => {
     return !personToRemove.equals(element);
   });
   personsList = remainingPersonsList;
   displayPersonsList();
+
   evt.preventDefault();
 });
 
 extractWinnerButton.addEventListener('click', (evt) => {
-  const winnerIndex = getRandomIntInRange(0, personsList.length - 1);
-  const winnerText = `Castigatorul este ${personsList[winnerIndex].name} ${personsList[winnerIndex].surname}`;
-  document.getElementById('winnerParagraph').innerText = winnerText;
+
+  if (personsList.length > 2) {
+    const winnerIndex = getRandomIntInRange(0, personsList.length - 1);
+    const winnerText = `Castigatorul este ${personsList[winnerIndex].name} ${personsList[winnerIndex].surname}`;
+    document.getElementById('winnerParagraph').innerText = winnerText;
+  } else if (personsList.length === 0) {
+    alert("Nimeni e castigator ... daca te tii de glume nici eu nu sunt serios!");
+  } else alert("Cum ar fi sa concureze singur si sa nu castige???");
+
   evt.preventDefault();
 });
 
@@ -67,3 +85,7 @@ function getRandomIntInRange(min, max) {
   const inRange = rand * (parseInt(max) - parseInt(min)) + parseInt(min);
   return Math.floor(inRange);
 }
+
+const toStartingCapitals = (string) => {
+  return string.split('\\s|-').map((s) => { return s.charAt(0).toUpperCase() + s.substring(1); }).reduce((s1, s2) => { return s1 + " " + s2; });
+};
