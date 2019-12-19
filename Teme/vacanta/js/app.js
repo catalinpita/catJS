@@ -50,7 +50,7 @@ removePersonButton.addEventListener('click', (evt) => {
 
 extractWinnerButton.addEventListener('click', (evt) => {
 
-  if (personsList.length >=2) {
+  if (personsList.length >= 2) {
     const winnerIndex = getRandomIntInRange(0, personsList.length - 1);
     const winnerText = `Castigatorul este ${personsList[winnerIndex].name} ${personsList[winnerIndex].surname}`;
     document.getElementById('winnerParagraph').innerText = winnerText;
@@ -76,6 +76,7 @@ function displayPersonsList() {
     const liElement = document.createElement('li');
     liElement.innerText = `${person.name} ${person.surname}`;
     personsListElement.appendChild(liElement);
+    liElement.appendChild(createDeletePersonButton(personsList.indexOf(person)));
   });
 }
 
@@ -88,4 +89,16 @@ function getRandomIntInRange(min, max) {
 
 const toStartingCapitals = (string) => {
   return string.split(/\s|-/).map((s) => { return s.charAt(0).toUpperCase() + (s.length > 1 ? s.substring(1) : ''); }).reduce((s1, s2) => { return s1 + " " + s2; });
+};
+
+
+const createDeletePersonButton = (indexToRemove) => {
+  const button = document.createElement('button');
+  button.classList.add("btn", "btn-sm", "btn-outline-danger");
+  button.innerText = '-';
+  button.addEventListener('click', () => {
+    personsList.splice(indexToRemove, 1);
+    displayPersonsList();
+  });
+  return button;
 };
