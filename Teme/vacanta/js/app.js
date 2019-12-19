@@ -87,5 +87,5 @@ function getRandomIntInRange(min, max) {
 }
 
 const toStartingCapitals = (string) => {
-  return string.split('\\s|-').map((s) => { return s.charAt(0).toUpperCase() + (s.length > 1 ? s.substring(1) : ''); }).reduce((s1, s2) => { return s1 + " " + s2; });
+  return string.split(/\s|-/).map((s) => { return s.charAt(0).toUpperCase() + (s.length > 1 ? s.substring(1) : ''); }).reduce((s1, s2) => { return s1 + " " + s2; });
 };
