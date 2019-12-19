@@ -50,7 +50,7 @@ removePersonButton.addEventListener('click', (evt) => {
 
 extractWinnerButton.addEventListener('click', (evt) => {
 
-  if (personsList.length > 2) {
+  if (personsList.length >=2) {
     const winnerIndex = getRandomIntInRange(0, personsList.length - 1);
     const winnerText = `Castigatorul este ${personsList[winnerIndex].name} ${personsList[winnerIndex].surname}`;
     document.getElementById('winnerParagraph').innerText = winnerText;
