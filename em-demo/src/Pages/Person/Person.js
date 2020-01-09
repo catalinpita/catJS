@@ -40,4 +40,4 @@ export class Person extends Component {
       </div>
     );
   }
-}
+} 
